@@ -2,7 +2,9 @@ package com.gabriel.kotlinstars.features.ui.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.gabriel.kotlinstars.R
 import com.gabriel.kotlinstars.core.domain.model.entity.GitRepository
 import com.gabriel.kotlinstars.core.extensions.loadFromUrl
@@ -13,11 +15,27 @@ import com.gabriel.kotlinstars.features.ui.viewmodel.GitReposViewModel
 
 class GitRepoDetailFragment : BaseFragment(R.layout.fragment_git_repo_detail) {
 
-    private val binding by viewBinding(FragmentGitRepoDetailBinding::bind)
+    private var _binding: FragmentGitRepoDetailBinding? = null
+    private val binding get() = _binding!!
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentGitRepoDetailBinding.inflate(inflater, container, false)
+        return binding.root
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getArgs()
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun getArgs() {
@@ -57,4 +75,11 @@ class GitRepoDetailFragment : BaseFragment(R.layout.fragment_git_repo_detail) {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }
