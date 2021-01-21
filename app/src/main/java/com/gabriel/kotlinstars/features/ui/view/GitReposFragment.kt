@@ -12,10 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.gabriel.kotlinstars.R
 import com.gabriel.kotlinstars.core.di.DaggerComponent
 import com.gabriel.kotlinstars.core.domain.model.entity.GitRepository
-import com.gabriel.kotlinstars.core.extensions.failure
-import com.gabriel.kotlinstars.core.extensions.observe
-import com.gabriel.kotlinstars.core.extensions.setUpRecyclerView
-import com.gabriel.kotlinstars.core.extensions.viewModel
+import com.gabriel.kotlinstars.core.extensions.*
 import com.gabriel.kotlinstars.core.platform.BaseFragment
 import com.gabriel.kotlinstars.databinding.FragmentGitReposBinding
 import com.gabriel.kotlinstars.features.ui.adapter.GitReposAdapter
@@ -27,26 +24,13 @@ class GitReposFragment : BaseFragment(R.layout.fragment_git_repos), SearchView.O
     private lateinit var viewModel: GitReposViewModel
 
 
-    private var _binding: FragmentGitReposBinding? = null
-
-    private val binding get() = _binding
+    private val binding by viewBinding(FragmentGitReposBinding::bind)
 
     private var reposAdapter: GitReposAdapter? = null
 
     private var searchView: SearchView? = null
 
     private var reposGeneral: List<GitRepository>? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setHasOptionsMenu(true)
-        _binding = FragmentGitReposBinding.inflate(inflater, container, false)
-        return _binding?.root ?: View(context)
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,7 +42,7 @@ class GitReposFragment : BaseFragment(R.layout.fragment_git_repos), SearchView.O
 
     private fun setUpRecycler() {
 
-        binding?.reposRecycler?.apply {
+        binding.reposRecycler.apply {
             setUpRecyclerView(requireContext(), {
                 reposAdapter = GitReposAdapter(arrayListOf(), ::navigateToDetail)
                 adapter = reposAdapter
