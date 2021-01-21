@@ -2,6 +2,7 @@ package com.gabriel.kotlinstars.core.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.gabriel.kotlinstars.features.ui.viewmodel.GitReposViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -34,6 +35,10 @@ abstract class ViewModelModule {
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(GitReposViewModel::class)
+    internal abstract fun gitViewModel(viewModel: GitReposViewModel): ViewModel
 
 
 //    Add more vm here
