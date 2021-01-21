@@ -1,6 +1,7 @@
 package com.gabriel.kotlinstars.core.data
 
 import com.gabriel.kotlinstars.core.domain.model.entity.GitRepository
+import com.gabriel.kotlinstars.core.domain.model.entity.GitRepositoryResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
@@ -14,6 +15,6 @@ interface ApiGithubInterface {
             Pair("sort", "stars")
         ),
         @Query("page") page: Int
-    ): List<GitRepository>?
+    ): GitRepositoryResponse
 
 }

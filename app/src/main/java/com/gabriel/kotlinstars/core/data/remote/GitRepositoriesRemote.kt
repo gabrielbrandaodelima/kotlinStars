@@ -11,7 +11,7 @@ class GitRepositoriesRemote {
         return flow {
             try {
                 val repos = ApiGithub.apiService.fetchRepos(page = page.toInt())
-                emit(repos)
+                emit(repos.items)
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(null)
