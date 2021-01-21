@@ -9,8 +9,9 @@ import com.gabriel.kotlinstars.core.platform.BaseActivity
 
 class GitReposActivity : BaseActivity(R.layout.activity_git_repos) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onDestinationChangedListener(destination: NavDestination) {
+        super.onDestinationChangedListener(destination)
+
     }
 
 }

@@ -20,8 +20,6 @@ class GitReposViewModel @Inject constructor(
     private val _gitRepos = MutableLiveData<List<GitRepository>>()
     val gitRepos: LiveData<List<GitRepository>> = _gitRepos
 
-    private val _loading = MutableLiveData(false)
-    var loading : LiveData<Boolean> = _loading
 
     private val coroutinesContext = Dispatchers.IO
 
