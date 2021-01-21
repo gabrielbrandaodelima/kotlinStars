@@ -1,11 +1,8 @@
 package com.gabriel.kotlinstars.features.ui.view
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
@@ -60,25 +57,61 @@ class GitReposFragment : BaseFragment(R.layout.fragment_git_repos), SearchView.O
     private fun initViewModel() {
         viewModel = viewModel(viewModelFactory) {
             observe(gitRepos, ::handleSuccessList)
+            observe(loading, {
+                it?.let { it1 -> manageProgress(it1) }
+            })
             failure(failure, ::handleFailure)
         }
         viewModel.fetchRepos()
     }
 
-    private fun handleSuccessList(list: List<GitRepository>?) {
-        TODO("Not yet implemented")
+    private fun manageProgress(loading: Boolean) {
+        if (loading) {
+            binding.reposRecycler.gone()
+            binding.progress.visible()
+        } else {
+            binding.reposRecycler.visible()
+            binding.progress.gone()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.options_menu, menu)
+        searchView = menu.findItem(R.id.search).actionView as? SearchView
+        searchView?.setOnQueryTextListener(this)
+    }
+
+    private fun handleSuccessList(repos: List<GitRepository>?) {
+        reposGeneral = repos
+        reposAdapter?.addAll(repos as ArrayList<GitRepository>)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        TODO("Not yet implemented")
+        filter(query)
+        return false
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        TODO("Not yet implemented")
+        filter(newText)
+        return false
     }
 
     override fun onClose(): Boolean {
-        TODO("Not yet implemented")
+        resetAdapter()
+        return false
+    }
+
+    private fun filter(query: String?) {
+        if (query != null && query.isNotEmpty()) {
+            val filtered = reposAdapter?.gitRepos?.filter { it.full_name.contains(query) }
+            reposAdapter?.addAll(filtered as ArrayList<GitRepository>)
+        } else
+            resetAdapter()
+    }
+
+    private fun resetAdapter() {
+        reposAdapter?.addAll(reposGeneral as ArrayList<GitRepository>)
     }
 
 }
