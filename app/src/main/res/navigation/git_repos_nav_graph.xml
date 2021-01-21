@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/git_repos_nav_graph"
+    app:startDestination="@id/gitReposFragment">
+
+    <fragment
+        android:id="@+id/gitReposFragment"
+        android:name="com.gabriel.kotlinstars.features.ui.view.GitReposFragment"
+        android:label="GitRepoDetailFragment"
+        tools:layout="@layout/fragment_git_repos">
+        <action
+            android:id="@+id/action_gitReposFragment_to_gitRepoDetailFragment"
+            app:destination="@id/gitRepoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gitRepoDetailFragment"
+        android:name="com.gabriel.kotlinstars.features.ui.view.GitRepoDetailFragment"
+        android:label="GitRepoDetailFragment"
+        tools:layout="@layout/fragment_git_repo_detail"/>
+</navigation>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|top"
+    android:orientation="vertical">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/owner_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/owner_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        tools:text="name" />
+
+    <TextView
+        android:id="@+id/repo_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        tools:text="repo" />
+
+    <TextView
+        android:id="@+id/repo_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        tools:text="desc" />
+
+    <TextView
+        android:id="@+id/repo_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        tools:text="STARS" />
+
+    <TextView
+        android:id="@+id/repo_forks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        tools:text="FORKS" />
+
+
+</LinearLayout>
