@@ -2,9 +2,9 @@ package com.gabriel.kotlinstars.features.ui.view
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.gabriel.kotlinstars.R
 import com.gabriel.kotlinstars.core.di.DaggerComponent
@@ -29,6 +29,8 @@ class GitReposFragment : BaseFragment(R.layout.fragment_git_repos), SearchView.O
 
     private var reposGeneral: List<GitRepository>? = null
 
+    private var needsLoading = MutableLiveData(true)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -46,6 +48,10 @@ class GitReposFragment : BaseFragment(R.layout.fragment_git_repos), SearchView.O
                 adapter = reposAdapter
             })
 
+            setUpPaging(needsLoading) {
+                viewModel.fetchRepos()
+            }
+
         }
 
     }
@@ -57,13 +63,20 @@ class GitReposFragment : BaseFragment(R.layout.fragment_git_repos), SearchView.O
 
     private fun initViewModel() {
         viewModel = viewModel(viewModelFactory) {
-            observe(gitRepos, ::handleSuccessList)
+            observe(gitRepos, { it?.let { it1 -> handleSuccessList(it1) } })
+            observe(pageLoading, {
+                it?.let { it1 -> managePageProgress(it1) }
+            })
             observe(loading, {
                 it?.let { it1 -> manageProgress(it1) }
             })
             failure(failure, ::handleFailure)
         }
         viewModel.fetchRepos()
+    }
+
+    private fun managePageProgress(loading: Boolean) {
+        binding.reposProgress.visibility(loading)
     }
 
     private fun manageProgress(loading: Boolean) {
@@ -83,9 +96,18 @@ class GitReposFragment : BaseFragment(R.layout.fragment_git_repos), SearchView.O
         searchView?.setOnQueryTextListener(this)
     }
 
-    private fun handleSuccessList(repos: List<GitRepository>?) {
-        reposGeneral = repos
-        reposAdapter?.addAll(repos as ArrayList<GitRepository>)
+    private fun handleSuccessList(pair: Pair<List<GitRepository>?, Int>) {
+        needsLoading.postValue(true)
+        val repos = pair.first
+        val page = pair.second
+        if (page == 1) {
+            reposGeneral = repos
+            reposAdapter?.addAll(repos as ArrayList<GitRepository>)
+        } else {
+
+            repos?.toMutableList()?.let { reposGeneral?.toMutableList()?.addAll(it) }
+            reposAdapter?.appendAll(repos as ArrayList<GitRepository>)
+        }
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

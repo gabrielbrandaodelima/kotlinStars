@@ -9,6 +9,9 @@ abstract class BaseViewModel : ViewModel() {
     private var _failure: MutableLiveData<String?> = MutableLiveData()
     var failure: LiveData<String?> = _failure
 
+    protected val _pageLoading = MutableLiveData(false)
+    var pageLoading : LiveData<Boolean> = _pageLoading
+
     protected val _loading = MutableLiveData(false)
     var loading : LiveData<Boolean> = _loading
 

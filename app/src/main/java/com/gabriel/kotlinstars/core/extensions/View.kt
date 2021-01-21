@@ -11,5 +11,4 @@ fun View.invisible() { this.visibility = View.INVISIBLE }
 
 fun View.gone() { this.visibility = View.GONE }
 
-
-
+fun View.visibility(boolean: Boolean) = if(boolean) this.visible() else this.gone()

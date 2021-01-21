@@ -35,8 +35,8 @@ fun RecyclerView?.setUpPaging(
                         val totItemCount = it.itemCount
                         val pastItemCount = it.findFirstVisibleItemPosition()
 
-                        needsLoading.value?.let { reload ->
-                            if (reload) {
+                        needsLoading.value?.let { load ->
+                            if (load) {
                                 if (visItemCount + pastItemCount >= totItemCount) {
                                     needsLoading.value = false
                                     refreshList()

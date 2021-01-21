@@ -34,6 +34,12 @@ class GitReposAdapter(
         notifyDataSetChanged()
     }
 
+    internal fun appendAll(linksList: ArrayList<GitRepository>) {
+        val startindex = gitRepos.size
+        gitRepos.addAll(startindex, linksList)
+        notifyItemRangeInserted(startindex, linksList.size)
+    }
+
     fun clear() {
         gitRepos.clear()
         notifyDataSetChanged()

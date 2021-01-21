@@ -29,4 +29,14 @@
         tools:listitem="@layout/item_git_repos"
         android:layout_height="match_parent" />
 
+    <ProgressBar
+        android:id="@+id/repos_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="10dp"
+        />
+
+
 </FrameLayout>

@@ -15,25 +15,35 @@ import javax.inject.Inject
 
 class GitReposViewModel @Inject constructor(
     private val gitReposUseCase: FetchReposUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
 
-    private val _gitRepos = MutableLiveData<List<GitRepository>>()
-    val gitRepos: LiveData<List<GitRepository>> = _gitRepos
+    private val _gitRepos = MutableLiveData<Pair<List<GitRepository>?, Int>>()
+    val gitRepos: LiveData<Pair<List<GitRepository>?, Int>> = _gitRepos
+    var page: Int = 1
 
 
     private val coroutinesContext = Dispatchers.IO
 
-    fun fetchRepos(page: Int = 1) {
-        _loading.postValue(true)
+    fun fetchRepos() {
+        when (page) {
+            1 -> _loading.postValue(true)
+            else -> _pageLoading.postValue(true)
+        }
         viewModelScope.launch(coroutinesContext) {
-            gitReposUseCase.execute(page.toString())
+            gitReposUseCase.execute((page).toString())
                 .catch { e ->
                     handleFailure(e.message)
-                    _loading.postValue(false)
+                    when (page) {
+                        1 -> _loading.postValue(false)
+                        else -> _pageLoading.postValue(false)
+                    }
                 }
                 .collect { repos ->
-                    _gitRepos.postValue(repos)
-                    _loading.postValue(false)
+                    _gitRepos.postValue(Pair(repos, page))
+                    when (page++) {
+                        1 -> _loading.postValue(false)
+                        else -> _pageLoading.postValue(false)
+                    }
                 }
         }
     }
