@@ -10,8 +10,8 @@ class FetchReposUseCase @Inject constructor(
     private val repository: GitReposRepository
 ) {
 
-    suspend fun execute(): Flow<List<GitRepository>?> {
-        return repository.fetchRepos()
+    suspend fun execute(page: String): Flow<List<GitRepository>?> {
+        return repository.fetchRepos(page)
     }
 
 }

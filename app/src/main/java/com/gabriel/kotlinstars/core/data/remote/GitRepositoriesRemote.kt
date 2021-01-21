@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.flow
 
 class GitRepositoriesRemote {
 
-    fun fetchPublicRepositories(): Flow<List<GitRepository>?> {
+    fun fetchPublicRepositories(page: String): Flow<List<GitRepository>?> {
         return flow {
             try {
-                val repos = ApiGithub.apiService.fetchRepos()
+                val repos = ApiGithub.apiService.fetchRepos(page = page.toInt())
                 emit(repos)
             } catch (e: Exception) {
                 e.printStackTrace()
