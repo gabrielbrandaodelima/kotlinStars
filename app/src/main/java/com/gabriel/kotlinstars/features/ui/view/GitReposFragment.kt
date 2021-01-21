@@ -31,6 +31,7 @@ class GitReposFragment : BaseFragment(R.layout.fragment_git_repos), SearchView.O
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         DaggerComponent.create().inject(this)
         setUpRecycler()
         initViewModel()
