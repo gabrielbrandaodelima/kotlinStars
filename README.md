@@ -11,12 +11,12 @@
 
 # Third party libraries used 
 
-* [Retrofit](https://square.github.io/retrofit/), usado para comunicação Http.
+* [Retrofit](https://square.github.io/retrofit/), for Http communications.
 
-* [GSON](https://github.com/google/gson), usado para serializar o Json retornado pela API.
+* [GSON](https://github.com/google/gson), for Json serializing.
 
-* [Dagger](https://github.com/google/dagger), usado para Injeção de dependência.
+* [Dagger](https://github.com/google/dagger), for dependency injection.
 
-* [Picasso](https://github.com/square/picasso), usado para fazer o load de imagens.
+* [Picasso](https://github.com/square/picasso), for image loading.
 
-* [Lottie](https://github.com/airbnb/lottie-android), usado para carregar animações como a de loading.
+* [Lottie](https://github.com/airbnb/lottie-android), for vector animations.
