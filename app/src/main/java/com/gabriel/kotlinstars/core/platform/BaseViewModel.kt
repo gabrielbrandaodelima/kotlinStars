@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 
 abstract class BaseViewModel : ViewModel() {
 
-    private var _failure: MutableLiveData<String> = MutableLiveData()
-    var failure: LiveData<String> = _failure
+    private var _failure: MutableLiveData<String?> = MutableLiveData()
+    var failure: LiveData<String?> = _failure
 
-    protected fun handleFailure(failure: String) {
-        _failure.value = failure
+    protected fun handleFailure(failure: String?) {
+        _failure.postValue(failure)
     }
 }
