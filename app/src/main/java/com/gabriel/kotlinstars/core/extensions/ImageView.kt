@@ -3,9 +3,7 @@ package com.gabriel.kotlinstars.core.extensions
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.squareup.picasso.Picasso
 
 fun ImageView.loadFromUrl(url: String) =
-    Glide.with(this.context.applicationContext)
-        .load(url)
-        .transition(DrawableTransitionOptions.withCrossFade())
-        .into(this)
+    Picasso.get().load(url).into(this)
