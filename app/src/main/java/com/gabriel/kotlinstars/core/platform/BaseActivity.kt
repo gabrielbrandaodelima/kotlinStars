@@ -31,7 +31,7 @@ abstract class BaseActivity(@LayoutRes layoutIdRes : Int = 0) : AppCompatActivit
 
     }
 
-    private fun onDestinationChangedListener(
+    open fun onDestinationChangedListener(
         destination: NavDestination,
     ) {
         navDestination = destination
