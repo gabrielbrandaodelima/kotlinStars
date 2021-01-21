@@ -104,7 +104,7 @@ class GitReposFragment : BaseFragment(R.layout.fragment_git_repos), SearchView.O
 
     private fun filter(query: String?) {
         if (query != null && query.isNotEmpty()) {
-            val filtered = reposAdapter?.gitRepos?.filter { it.full_name.contains(query) }
+            val filtered = reposAdapter?.gitRepos?.filter { it.full_name?.contains(query) == true }
             reposAdapter?.addAll(filtered as ArrayList<GitRepository>)
         } else
             resetAdapter()

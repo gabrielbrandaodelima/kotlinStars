@@ -47,9 +47,9 @@ class GitReposAdapter(
             gitRepository: GitRepository
         ) {
             with(view) {
-                repoImg.loadFromUrl(gitRepository.owner.avatar_url)
+                gitRepository.owner?.avatar_url?.let { repoImg.loadFromUrl(it) }
                 repoName.text = gitRepository.full_name
-                repoUsername.text = gitRepository.owner.login
+                repoUsername.text = gitRepository.owner?.login
                 repoCell.setOnClickListener { click.invoke(gitRepository) }
             }
         }
