@@ -13,9 +13,11 @@ data class GitRepositoryResponse(
 
 @Parcelize
 data class GitRepository(
-    @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("full_name") val full_name: String,
-    @SerializedName("owner") val owner: Owner,
-    @SerializedName("description") val description: String,
+    @SerializedName("id") val id: Int? = null,
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("full_name") val full_name: String? = null,
+    @SerializedName("owner") val owner: Owner? = null,
+    @SerializedName("description") val description: String? = null,
+    @SerializedName("stargazers_count") val stargazers_count: String? = null,
+    @SerializedName("forks_count") val forks_count: String? = null,
 ) : Parcelable
