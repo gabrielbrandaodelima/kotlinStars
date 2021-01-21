@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gabriel.kotlinstars.core.domain.model.entity.GitRepository
+import com.gabriel.kotlinstars.core.extensions.loadFromUrl
 import com.gabriel.kotlinstars.databinding.ItemGitReposBinding
 
 class GitReposAdapter(
@@ -46,6 +47,7 @@ class GitReposAdapter(
             gitRepository: GitRepository
         ) {
             with(view) {
+                repoImg.loadFromUrl(gitRepository.owner.avatar_url)
                 repoName.text = gitRepository.full_name
                 repoUsername.text = gitRepository.owner.login
                 repoCell.setOnClickListener { click.invoke(gitRepository) }
